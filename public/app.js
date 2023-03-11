@@ -7,20 +7,26 @@ let comp = 0;
 let human = 0;
 let round = 1;
 
-function getComputerChoice(){
+function getComputerChoice() {
   return possibleChoices[Math.floor(Math.random() * 3)];
 }
 
-function isPossibleChoice(choice){
-  return possibleChoices.find(x => x === choice) !== undefined;
+function isPossibleChoice(choice) {
+  return possibleChoices.find((x) => x === choice) !== undefined;
 }
 
 function playRound() {
   let computer = getComputerChoice();
-  let player = prompt(`Round: ${round} \nPlease enter your choice`).toLowerCase();
+  let player = prompt(`Round: ${round} \nPlease enter your choice`)
+    .trim()
+    .toLowerCase();
 
-  while(!isPossibleChoice(player)){
-    player = prompt(`Round: ${round} \nPlease enter your choice (${rock}, ${paper}, ${scissors})`).toLowerCase();
+  while (!isPossibleChoice(player)) {
+    player = prompt(
+      `Round: ${round} \nPlease enter your choice (${rock}, ${paper}, ${scissors})`
+    )
+      .trim()
+      .toLowerCase();
   }
 
   console.log("YOUR CHOICE", player);
@@ -54,12 +60,16 @@ function game() {
     playRound();
     round++;
   }
+
   let winner = "Draw!";
-  if(human > comp){
+  
+  if (human > comp) {
     winner = "You win!";
-  }else if(comp > human){
+  } else if (comp > human) {
     winner = "Computer wins!";
   }
+
   alert(`Score \nComputer: ${comp} You: ${human} \n${winner}`);
 }
+
 game();
