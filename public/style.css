@@ -1,0 +1,60 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 72px;
+}
+
+.choice {
+  font-size: 48px;
+  background-color: rgb(54, 7, 54);
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  width: 250px;
+}
+
+.choice:hover {
+  background-color: white;
+  color: rgb(54, 7, 54);
+  cursor: pointer;
+}
+
+.score-title {
+  font-size: 48px;
+}
+
+.score {
+  font-size: 32px;
+}
+
+.winner {
+  font-size: 32px;
+  display: flex;
+}
+
+.play-again {
+  display: flex;
+  width: 300px;
+  justify-content: center;
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 48px;
+}
+
+.play-again:hover {
+  background-color: white;
+  color: green;
+  cursor: pointer;
+  border: 2px solid green;
+}
+
+.disabled {
+  display: none;
+}

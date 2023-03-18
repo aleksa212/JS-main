@@ -4,9 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Game</title>
   </head>
   <body>
+    <div class="content">
+      <h1 class="title">Choose</h1>
+      <div>
+        <button id="rock" class="choice" value="rock">rock</button>
+        <button id="paper" class="choice" value="paper">paper</button>
+        <button id="scissors" class="choice" value="scissors">scissors</button>
+      </div>
+
+      <div class="score-container">
+        <h2 class="score-title">Score:</h2>
+        <h2 class="score">Computer:<span id="computer-score">0</span></h2>
+        <h2 class="score">Player:<span id="player-score">0</span></h2>
+      </div>
+
+      <h2 class="winner" id="winner"></h2>
+      <button class="play-again disabled" id="play-again">Play again</button>
+    </div>
+
     <script src="./app.js"></script>
   </body>
 </html>

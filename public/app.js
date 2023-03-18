@@ -1,75 +1,78 @@
-const rock = "rock";
-const paper = "paper";
-const scissors = "scissors";
+const rockBtn = document.getElementById("rock");
+const paperBtn = document.getElementById("paper");
+const scissorsBtn = document.getElementById("scissors");
+const compPoints = document.getElementById("computer-score");
+const humanPoints = document.getElementById("player-score");
+const winner = document.getElementById("winner");
+const playAgainBtn = document.getElementById("play-again");
+
+const rock = rockBtn.value;
+const paper = paperBtn.value;
+const scissors = scissorsBtn.value;
+
 const possibleChoices = [rock, paper, scissors];
 
 let comp = 0;
 let human = 0;
-let round = 1;
 
 function getComputerChoice() {
   return possibleChoices[Math.floor(Math.random() * 3)];
 }
 
-function isPossibleChoice(choice) {
-  return possibleChoices.find((x) => x === choice) !== undefined;
-}
-
-function playRound() {
+function playRound(event) {
   let computer = getComputerChoice();
-  let player = prompt(`Round: ${round} \nPlease enter your choice`)
-    .trim()
-    .toLowerCase();
-
-  while (!isPossibleChoice(player)) {
-    player = prompt(
-      `Round: ${round} \nPlease enter your choice (${rock}, ${paper}, ${scissors})`
-    )
-      .trim()
-      .toLowerCase();
-  }
+  let player = event.target.value;
 
   console.log("YOUR CHOICE", player);
   console.log("COMPUTER CHOICE", computer);
 
-  if (computer === paper && player === rock) {
-    comp++;
-    alert("computer wins");
-  } else if (computer === paper && player === scissors) {
-    human++;
-    alert("player wins");
-  } else if (computer === rock && player === scissors) {
-    comp++;
-    alert("computer wins");
-  } else if (computer === rock && player === paper) {
-    human++;
-    alert("player wins");
-  } else if (computer === scissors && player === paper) {
-    comp++;
-    alert("computer wins");
-  } else if (computer === scissors && player === rock) {
-    human++;
-    alert("player wins");
+  if (computer === player) {
+    winner.textContent = "Draw";
   } else {
-    alert("draw");
+    const computerWins =
+      (computer === paper && player === rock) ||
+      (computer === rock && player === scissors) ||
+      (computer === scissors && player === paper);
+
+    if (computerWins) {
+      comp++;
+      compPoints.textContent = comp;
+      winner.textContent = "Computer wins this round";
+    } else {
+      human++;
+      humanPoints.textContent = human;
+      winner.textContent = "You win this round";
+    }
+  }
+
+  if (human === 5) {
+    winner.textContent = "Congratulations You Win!!!";
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    playAgainBtn.classList.remove("disabled");
+  } else if (comp === 5) {
+    winner.textContent = "Computer wins!!!";
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    playAgainBtn.classList.remove("disabled");
   }
 }
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    playRound();
-    round++;
-  }
-
-  let winner = "Draw!";
-  
-  if (human > comp) {
-    winner = "You win!";
-  } else if (comp > human) {
-    winner = "Computer wins!";
-  }
-
-  alert(`Score \nComputer: ${comp} You: ${human} \n${winner}`);
+function reset() {
+  comp = 0;
+  human = 0;
+  compPoints.textContent = comp;
+  humanPoints.textContent = human;
+  playAgainBtn.classList.add("disabled");
+  rockBtn.disabled = false;
+  paperBtn.disabled = false;
+  scissorsBtn.disabled = false;
+  winner.textContent = "";
 }
 
-game();
+rockBtn.addEventListener("click", playRound);
+paperBtn.addEventListener("click", playRound);
+scissorsBtn.addEventListener("click", playRound);
+playAgainBtn.addEventListener("click", reset);
